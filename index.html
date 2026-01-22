@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Farmer Assistant</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background:#f4f7f6; }
+    header { background:#2e7d32; color:#fff; padding:20px; text-align:center; }
+    section { padding:20px; max-width:900px; margin:auto; }
+    .card { background:#fff; padding:20px; margin-bottom:15px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1);}    
+    label { display:block; margin-top:10px; }
+    select, input { width:100%; padding:8px; margin-top:5px; }
+    button { margin-top:15px; padding:10px 20px; background:#2e7d32; color:#fff; border:none; border-radius:5px; cursor:pointer; }
+    .result { margin-top:15px; background:#e8f5e9; padding:15px; border-radius:6px; }
+    footer { text-align:center; padding:10px; background:#ddd; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Smart Farmer Assistant</h1>
+    <p>Soil • Crop • Growth • Market • Profit Decision</p>
+  </header>  <section>
+    <div class="card">
+      <h2>Farmer Input</h2>
+      <label>Soil Type</label>
+      <select id="soil">
+        <option>Loamy</option>
+        <option>Black</option>
+        <option>Red</option>
+        <option>Sandy</option>
+      </select><label>Season</label>
+  <select id="season">
+    <option>Kharif</option>
+    <option>Rabi</option>
+    <option>Zaid</option>
+  </select>
+
+  <label>Land Area (acres)</label>
+  <input type="number" id="area" value="1" />
+
+  <button onclick="analyze()">Analyze Crop</button>
+</div>
+
+<div id="output" class="card" style="display:none;"></div>
+
+  </section>  <footer>
+    <p>Demo Website – Smart Farmer Project</p>
+  </footer>  <script>
+    function analyze() {
+      const soil = document.getElementById('soil').value;
+      const season = document.getElementById('season').value;
+      const area = document.getElementById('area').value;
+
+      let crop = 'Tomato';
+      let demand = 85;
+      let profit = 30000 * area;
+      let decision = 'RECOMMENDED';
+
+      if (soil === 'Sandy') { crop = 'Groundnut'; demand = 60; profit = 18000 * area; decision = 'RISKY'; }
+      if (soil === 'Black') { crop = 'Cotton'; demand = 75; profit = 50000 * area; decision = 'RECOMMENDED'; }
+
+      document.getElementById('output').style.display = 'block';
+      document.getElementById('output').innerHTML = `
+        <h2>Result</h2>
+        <p><b>Suggested Crop:</b> ${crop}</p>
+        <p><b>Season:</b> ${season}</p>
+        <p><b>Market Demand Score:</b> ${demand}/100</p>
+        <p><b>Expected Profit:</b> ₹${profit}</p>
+        <p><b>Decision:</b> ${decision}</p>
+      `;
+    }
+  </script></body>
+</html>
